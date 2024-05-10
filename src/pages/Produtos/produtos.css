@@ -1,0 +1,17 @@
+.main-content {
+    margin: 40px 40px 40px 250px;
+    background-color: #fff;
+}
+
+.new-product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: red;
+    background-color: #fff;
+    color: black;
+}
+.new {
+    margin: 20px;
+}
