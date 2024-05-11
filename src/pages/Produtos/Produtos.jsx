@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Space, Table, Tag, Button, Select } from 'antd';
+import { Space, Table, Tag, Button, Select, Modal, Form, Input, Row, Col  } from 'antd';
 import './produtos.css'; // Importe o arquivo de estilo
 
 const { Option } = Select;
@@ -71,17 +71,6 @@ const columns = [
         key: 'valor',
         filters: []
     },
-    {
-        title: 'Ações',
-        key: 'action',
-        render: (_, record) => (
-            <Space size="middle">
-                <a>Editar {record.cod}</a>
-                <a>Excluir</a>
-            </Space>
-        ),
-        
-    },
 ];
 
 const data = [
@@ -151,12 +140,43 @@ const data = [
 const Produtos = () => {
     const [filtroRegiao, setFiltroRegiao] = useState(null);
     const [filtroTipoCliente, setFiltroTipoCliente] = useState(null);
+    const [editandoProduto, setEditandoProduto] = useState(null);
+    const [modalVisivel, setModalVisivel] = useState(false);
+    const { Option } = Select;
+
+    const abrirModalEdicao = (produto) => {
+        setEditandoProduto(produto);
+        setModalVisivel(true);
+    };
+
+    const fecharModalEdicao = () => {
+        setEditandoProduto(null);
+        setModalVisivel(false);
+    };
+
+    const handleSalvarEdicao = (values) => {
+        // Lógica para salvar a edição do produto
+        console.log('Valores editados:', values);
+        fecharModalEdicao();
+    };
 
     return (
         <div className="main-content">
             <a href="/addProdutos"><button className="btn" type="button">+ ADD PRODUTOS</button></a>
             <Table
-                columns={columns}
+                columns={[
+                    ...columns,
+                    {
+                        title: 'Ações',
+                        key: 'action',
+                        render: (_, record) => (
+                            <Space size="middle">
+                                <a onClick={() => abrirModalEdicao(record)}>Editar {record.cod}</a>
+                                <a>Excluir</a>
+                            </Space>
+                        ),
+                    }
+                ]}
                 dataSource={data}
                 // Aplica os filtros de região e tipo de cliente
                 onChange={(pagination, filters) => {
@@ -173,6 +193,85 @@ const Produtos = () => {
                 }}
                 filters={{ regiao: [filtroRegiao], tipoCliente: [filtroTipoCliente] }}
             />
+                     <Modal
+                title="Editar Produto"
+                visible={modalVisivel}
+                onCancel={fecharModalEdicao}
+                footer={null}
+            >
+                 {editandoProduto && (
+                    <Form className='editar' onFinish={handleSalvarEdicao} initialValues={editandoProduto}>
+                    <Row gutter={20}> {/* Define o espaçamento entre as colunas */}
+                        <Col span={12}> {/* Define que esta coluna ocupará metade do espaço */}
+                            <Form.Item label="Código" name="Cod" type="number">
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Data" name="data">
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Categoria" name="categoria">
+                                <Select>
+                                    <Option value="Suco">Suco</Option>
+                                    <Option value="Refrigerante">Refrigerante</Option>
+                                    <Option value="Energético">Energético</Option>
+                                </Select>
+                            </Form.Item>  
+                            {/* Adicione mais itens de formulário conforme necessário */}
+                        </Col>
+                        <Col span={12}> {/* Define que esta coluna ocupará metade do espaço */}
+                            <Form.Item label="ML" name="ml">
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Quantidade" name="qtd">
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Valor" name="valor">
+                                <Input />
+                            </Form.Item>
+                            {/* Adicione mais itens de formulário conforme necessário */}
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item label="Região" name="regiao">
+                                <Select>
+                                    <Option value="PE">PE</Option>
+                                    <Option value="BA">BA</Option>
+                                    <Option value="RJ">RJ</Option>
+                                    <Option value="SP">SP</Option>
+                                </Select>
+                            </Form.Item>
+                            {/* Adicione mais itens de formulário conforme necessário */}
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item label="Tipo de Cliente" name="TipoCliente">
+                                <Select>
+                                    <Option value="Bronze">Bronze</Option>
+                                    <Option value="Prata">Prata</Option>
+                                    <Option value="Ouro">Ouro</Option>
+                                </Select>  
+                            </Form.Item>
+                            {/* Adicione mais itens de formulário conforme necessário */}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={24}>
+                        <Form.Item label="Descrição" name="descricao">
+                                <Input />
+                            </Form.Item> 
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={24}>
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit">Salvar</Button>
+                                <Button onClick={fecharModalEdicao}>Cancelar</Button>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                </Form>
+                 )}
+            </Modal>
         </div>
     );
 };

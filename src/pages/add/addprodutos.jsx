@@ -33,15 +33,23 @@ const AddProdutos = () => {
 
       <form className='line'>
         <div className='smash'>Codigo*<input className="input" type="number" placeholder=" Novo" name="codigo" value={produto.codigo} onChange={handleChange} /> </div>
-        <div className='smash'>Categoria*<input className="input" type="text" placeholder=" Produto" name="categoria" value={produto.categoria} onChange={handleChange} /></div>
+        <div className='smash'>
+          Categoria*
+          <select className="input" name="categoria" value={produto.categoria} onChange={handleChange} style={{ cursor: 'pointer' }}>
+            <option value="">Produto</option> 
+            <option value="suco">Suco</option> 
+            <option value="refri">Refrigerante</option>    
+            <option value="ener">Energetico</option>  
+            </select>
+            </div>
         <div className='smash'>Descrição*<input className="desc" type="text" placeholder=" Descreva o nome do seu produto" name="descricao" value={produto.descricao} onChange={handleChange} /></div>
       </form>
       <form className='line'>
         <div className='smash'>ML*<input className="input" type="number" placeholder=" 600" name="ml" value={produto.ml} onChange={handleChange} /> </div>
         <div className='smash'>
           Região*
-          <select className="input" name="regiao" value={produto.regiao} onChange={handleChange}>
-            <option value="">UF</option>
+          <select className="input" name="regiao" value={produto.regiao} onChange={handleChange} style={{ cursor: 'pointer' }}>
+            <option value="">UF</option> 
             <option value="PE">PE</option>
             <option value="BA">BA</option>
             <option value="RJ">RJ</option>
@@ -50,14 +58,14 @@ const AddProdutos = () => {
         </div>
         <div className='smash'>
           Tipo Cliente*
-          <select className="input" name="tipoCliente" value={produto.tipoCliente} onChange={handleChange}>
+          <select className="input" name="tipoCliente" value={produto.tipoCliente} onChange={handleChange} style={{ cursor: 'pointer' }}>
             <option value="">Selecione...</option>
             <option value="bronze">Bronze</option>
             <option value="prata">Prata</option>
             <option value="ouro">Ouro</option>
           </select>
         </div>
-        <div className='smash'>Valor*<input className="descr" type="text" placeholder=" R$1500,00..." name="valor" value={produto.valor} onChange={handleChange} /></div>
+        <div className='smash'>Valor*<input className="descr" type="number" placeholder=" R$1500,00..." name="valor" value={produto.valor} onChange={handleChange} /></div>
       </form>
       <button className="bt" type="button" onClick={handleSubmit}>ADICIONAR PRODUTO</button>
     </div>
