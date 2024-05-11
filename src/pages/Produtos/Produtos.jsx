@@ -91,7 +91,7 @@ const data = [
         data: '2024-05-01',
         categoria: 'Refrigerante',
         descricao: 'Coca Cola  Original - Pet',
-        ml: '350 ml',
+        ml: '350',
         quantidade: 3,
         regiao: 'PE',
         tipoCliente: 'Bronze',
@@ -103,7 +103,7 @@ const data = [
         data: '2024-05-01',
         categoria: 'Refrigerante',
         descricao: 'Coca Cola  Original - Lata',
-        ml: '350 ml',
+        ml: '350',
         quantidade: 3,
         regiao: 'BA',
         tipoCliente: 'Bronze',
@@ -115,7 +115,7 @@ const data = [
         data: '2024-05-02',
         categoria: 'Energético',
         descricao: 'Monster - Lata',
-        ml: '200 ml',
+        ml: '200',
         quantidade: 5,
         regiao: 'BA',
         tipoCliente: 'Prata',
@@ -127,7 +127,7 @@ const data = [
         data: '2024-05-02',
         categoria: 'Água',
         descricao: 'Garrafa Cristal',
-        ml: '300 ml',
+        ml: '300',
         quantidade: 11,
         regiao: 'RJ',
         tipoCliente: 'Prata',
@@ -139,7 +139,7 @@ const data = [
         data: '2024-05-02',
         categoria: 'Heineken',
         descricao: 'Garrafa de Vidro',
-        ml: '350 ml',
+        ml: '350',
         quantidade: 12,
         regiao: 'SP',
         tipoCliente: 'Ouro',
@@ -152,17 +152,9 @@ const Produtos = () => {
     const [filtroRegiao, setFiltroRegiao] = useState(null);
     const [filtroTipoCliente, setFiltroTipoCliente] = useState(null);
 
-    const handleChangeRegiao = (value) => {
-        setFiltroRegiao(value);
-    };
-
-    const handleChangeTipoCliente = (value) => {
-        setFiltroTipoCliente(value);
-    };
-
     return (
         <div className="main-content">
-            <Button className='new'>+ Novo Produto</Button>
+            <a href="/addProdutos"><button className="btn" type="button">+ ADD PRODUTOS</button></a>
             <Table
                 columns={columns}
                 dataSource={data}

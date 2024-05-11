@@ -59,7 +59,7 @@ const Navbar = () => {
           </button>
           </Link>
 
-          <Link to="/">
+          <Link to="/produtos">
           <button>
             <span>
             <BiDollar/>
@@ -83,7 +83,7 @@ const Navbar = () => {
           <button>
             <span>
             <BsPlusCircleFill />
-               <span>Add Produto</span>
+               <span>Add Produtos</span>
             </span>
           </button>
           </Link>
